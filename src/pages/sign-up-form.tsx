@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { signUp } from "@/firebase/auth";
 
 const schema = z.object({
   email: z.string().email(),
@@ -34,8 +35,31 @@ export default function SignUpForm() {
     },
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: {
+    email: string;
+    username: string;
+    password: string;
+  }) => {
+    try {
+      const user = await signUp(data.username, data.email, data.password);
+    } catch (err: any) {
+      if (err.code == "auth/email-already-in-use") {
+        form.setError("root", {
+          type: "manual",
+          message: "Email already in use, try Sign In",
+        });
+      } else if (err.code == "auth/weak-password") {
+        form.setError("root", {
+          type: "manual",
+          message: "Weak Password",
+        });
+      } else if (err.code == "auth/invalid-email") {
+        form.setError("email", {
+          type: "manual",
+          message: "Invalid Email",
+        });
+      }
+    }
   };
 
   return (
@@ -74,7 +98,7 @@ export default function SignUpForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Password" type="password" />
+                <Input placeholder="Password" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -83,6 +107,7 @@ export default function SignUpForm() {
         <Button type="submit" className="w-full">
           Sign Up
         </Button>
+        <FormMessage>{form.formState.errors.root?.message}</FormMessage>
       </form>
     </Form>
   );

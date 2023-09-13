@@ -15,6 +15,8 @@ import { ArrowRight } from "lucide-react";
 import { useUserStore } from "../state/user-state";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { signIn } from "@/firebase/auth";
+import { FirebaseError } from "firebase/app";
 
 const schema = z.object({
   email: z.string().email(),
@@ -34,23 +36,30 @@ export default function LoginForm() {
 
   const { user, setUser } = useUserStore();
   const navigate = useNavigate();
-  const onSubmit = (data: any) => {
-    // TODO: login
-    // setUser(data);
-  };
-
-  useEffect(() => {
-    if (user) {
-      navigate("/", {
-        replace: true,
-      });
-    }
-  }, [user, navigate]);
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(async (data) => {
+          try {
+            await signIn(data.email, data.password);
+          } catch (err: any) {
+            if (err.code == "auth/user-not-found") {
+              form.setError("root", {
+                type: "manual",
+                message: "User not found, Please Sign Up",
+              });
+            } else if (err.code == "auth/wrong-password") {
+              form.setError("root", {
+                message: "Wrong password",
+              });
+            } else {
+              form.setError("root", {
+                message: err.message.replace("Firebase", ""),
+              });
+            }
+          }
+        })}
         className="space-y-3 mt-4 w-full"
       >
         <FormField
@@ -59,11 +68,7 @@ export default function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input
-                  placeholder="Email"
-                  {...field}
-                  className=""
-                />
+                <Input placeholder="Email" {...field} className="" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -84,11 +89,14 @@ export default function LoginForm() {
         <Button
           type="submit"
           // className="w-full rounded-md bg-clique border-black border-2 hover:bg-clique-dark py-6 px-4 text-base text-black text-left flex justify-between"
-            className="w-full"
+          className="w-full"
         >
           Sign In
         </Button>
-        <FormMessage />
+        {/* <p className="text-sm font-medium text-destructive">
+
+        </p> */}
+        <FormMessage>{form.formState.errors.root?.message}</FormMessage>
       </form>
     </Form>
   );

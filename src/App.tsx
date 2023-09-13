@@ -9,13 +9,16 @@ import Home from "./pages/home-view";
 import AuthPage from "./pages/auth-view";
 import LoginForm from "./pages/login-form";
 import SignUpForm from "./pages/sign-up-form";
+import { Protected } from "./components/Protected";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/invoice" element={<InvoiceView />} />
+        <Route element={<Protected />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/invoice" element={<InvoiceView />} />
+        </Route>
         <Route path="/auth" element={<AuthPage />}>
           <Route index element={<Navigate replace to="sign-in" />} />
           <Route path="sign-in" element={<LoginForm />} />

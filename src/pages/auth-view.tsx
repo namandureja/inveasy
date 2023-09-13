@@ -2,10 +2,19 @@ import { FileText } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNavigate, useLocation } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
 export default function AuthPage() {
   const navigate = useNavigate();
   const location = useLocation();
   console.log(location.pathname.split("/auth/")[1]);
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      navigate("/", {
+        replace: true,
+      });
+    }
+  });
   return (
     <main className="flex flex-col items-center w-full sm:w-[350px] mx-auto justify-center min-h-[100svh] pb-20 px-10">
       <div className="flex gap-2 items-center flex-row-reverse">

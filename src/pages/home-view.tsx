@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { signOut } from "@/firebase/auth";
 import { FileText, LayoutGrid, LayoutList, LogOut, Plus } from "lucide-react";
 import { useState } from "react";
 
@@ -11,7 +12,9 @@ export default function Home() {
           <h1 className="font-semibold">InvEasy</h1>
           <FileText />
         </div> */}
-        <LogOut className="cursor-pointer" size={24} />
+        <button onClick={signOut}>
+          <LogOut size={24} />
+        </button>
       </header>
       <div className="px-6 flex-1 overflow-hidden flex flex-col">
         <p className="text-2xl">Hello,</p>
