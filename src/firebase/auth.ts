@@ -6,7 +6,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { app, db, auth } from "./firebase";
-import { doc, runTransaction, setDoc } from "firebase/firestore";
+import { doc, getDoc, runTransaction, setDoc } from "firebase/firestore";
 import { GoogleAuthProvider } from "firebase/auth/cordova";
 
 /**
@@ -45,6 +45,8 @@ export async function signUp(
     photoUrl: user.photoURL,
   });
 
+  console.log("User created");
+
   return userCredential;
 }
 
@@ -75,3 +77,20 @@ export async function continueWithGoogle() {
 
   return user;
 }
+
+export async function getUser() {
+  const user = auth.currentUser;
+  if (!user) {
+    throw new Error("User not logged in");
+  }
+
+  let userDoc = await getDoc(doc(db, "users", user.uid));
+  return userDoc.data() as UserServer;
+}
+
+type UserServer = {
+  id: string;
+  username: string;
+  email: string;
+  photoUrl: string;
+};

@@ -7,7 +7,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { Invoice } from "../data/types";
+import { Invoice, InvoiceServer } from "../data/types";
 import { auth, db } from "./firebase";
 
 export async function uploadInvoice(invoice: Invoice) {
@@ -47,9 +47,13 @@ export async function fetchInvoices() {
 
   const snapshot = await getDocs(invoicesCollectionQuery);
 
-  const invoices: Invoice[] = [];
+  const invoices: InvoiceServer[] = [];
   snapshot.forEach((doc) => {
-    invoices.push(doc.data() as Invoice);
+    invoices.push({
+      ...doc.data(),
+      id: doc.id,
+      createdAt: doc.data().createdAt.toMillis(),
+    } as InvoiceServer);
   });
 
   return invoices;

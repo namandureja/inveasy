@@ -1,6 +1,5 @@
 import { auth } from "@/firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 export function Protected() {

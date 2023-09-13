@@ -1,10 +1,16 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { signOut } from "@/firebase/auth";
+import { auth } from "@/firebase/firebase";
+import { useInvoicesQuery } from "@/hooks/queries/useInvoicesQuery";
+import { useUserQuery } from "@/hooks/queries/useUserQuery";
 import { FileText, LayoutGrid, LayoutList, LogOut, Plus } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
   const [layout, setLayout] = useState<"grid" | "list">("grid");
+  const { data: invoicesData } = useInvoicesQuery();
+  const { data: userData } = useUserQuery();
+
   return (
     <main className="relative h-[100svh] flex flex-col">
       <header className="flex items-center justify-end px-6 pt-5 pb-1 text-2xl">
@@ -18,7 +24,7 @@ export default function Home() {
       </header>
       <div className="px-6 flex-1 overflow-hidden flex flex-col">
         <p className="text-2xl">Hello,</p>
-        <h1 className="text-4xl font-black">Naman.</h1>
+        <h1 className="text-4xl font-black">{userData?.username}.</h1>
         <div className="mt-4 text-lg font-bold w-full border-b pb-2 flex justify-between items-center">
           Your Invoices
           {layout === "grid" ? (
