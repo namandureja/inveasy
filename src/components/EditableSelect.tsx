@@ -27,9 +27,9 @@ const EditableSelect: FC<Props> = ({
   return (
     <>
       {pdfMode ? (
-        <Text style={compose("span " + (className ? className : ""))}>
+        <p className="py-1">
           {value}
-        </Text>
+        </p>
       ) : (
         <>
           <select

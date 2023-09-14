@@ -32,14 +32,15 @@ function ViewInvoicePage() {
       <div className="flex items-center gap-3 justify-center flex-wrap pb-3 px-4">
         <Button
           onClick={() => {
-            const doc = new jsPDF();
-            doc.html(document.querySelector("#print-this")!, {
+            const doc = new jsPDF({
+              compress: true,
+            });
+            const divToPrint = document.querySelector("#print-this");
+            if (!divToPrint) return;
+            doc.html(divToPrint as HTMLElement, {
               width: 200,
-              windowWidth: 800,
-              // center it
-              x: 4,
-              y: 0,
-
+              windowWidth: 700,
+              x: 5,
               callback: function (pdf) {
                 pdf.save("invoice.pdf");
               },

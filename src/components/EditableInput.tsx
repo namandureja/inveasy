@@ -21,15 +21,7 @@ const EditableInput: FC<Props> = ({
     <>
       {pdfMode ? (
         value ? (
-          <Text
-            style={{
-              ...compose("span " + (className ? className : "")),
-              textOverflow: "ellipsis",
-              overflow: "hidden",
-            }}
-          >
-            {value}
-          </Text>
+          <p className="py-1">{value}</p>
         ) : (
           <></>
         )
