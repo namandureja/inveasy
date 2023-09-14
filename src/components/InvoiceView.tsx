@@ -82,7 +82,7 @@ export default function InvoiceView({
   const total = subtotal - discountRate + taxRate;
 
   return (
-    <div className="space-y-2 w-full bg-white sm:space-y-4 p-3 md:p-5">
+    <div className="space-y-2 w-full bg-white sm:space-y-4 p-3 md:p-5 rounded-md">
       <div className="flex flex-col justify-between space-y-2 gap-x-2 border-b border-gray-900/10 pb-4 md:flex-row md:items-center md:space-y-0">
         <div className="flex gap-3 flex-wrap">
           <div className="flex space-x-2 items-center">

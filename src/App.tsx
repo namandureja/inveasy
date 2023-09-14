@@ -11,6 +11,7 @@ import SignUpForm from "./pages/sign-up-form";
 import { Protected } from "./components/Protected";
 import Home from "./pages/home-view";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ViewInvoicePage from "./pages/view-invoices";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ function App() {
           <Route element={<Protected />}>
             <Route path="/" element={<Home />} />
             <Route path="/invoice/new" element={<InvoicePage />} />
+            <Route path="/invoice/:id" element={<ViewInvoicePage />} />
           </Route>
           <Route path="/auth" element={<AuthPage />}>
             <Route index element={<Navigate replace to="sign-in" />} />

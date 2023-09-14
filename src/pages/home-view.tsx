@@ -88,13 +88,18 @@ export default function Home() {
           </div>
         ) : (
           <></>
-
         )}
         {invoicesData?.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 pt-4 gap-5 overflow-scroll pb-4">
-            {invoicesData?.map((invoice) => (
-              <FileCard key={invoice.id} invoice={invoice} />
-            ))}
+            {invoicesData
+              ?.sort(
+                (a, b) =>
+                  new Date(b.createdAt).getTime() -
+                  new Date(a.createdAt).getTime()
+              )
+              .map((invoice) => (
+                <FileCard key={invoice.id} invoice={invoice} />
+              ))}
           </div>
         ) : (
           <div className="w-full text-center text-gray-800 py-4 font-medium">

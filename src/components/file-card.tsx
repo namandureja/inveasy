@@ -5,30 +5,34 @@ import { cn } from "@/lib/utils";
 import { useBarStore } from "@/state/bar-state";
 import { FileText, MoreVertical } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function FileCard({ invoice }: { invoice?: InvoiceServer }) {
   const [selected, setSelected] = useState(false);
   const { addSelected } = useBarStore();
-  const onLongPress = () => {
-    setSelected(true);
-    addSelected("");
-  };
+  // const onLongPress = () => {
+  //   setSelected(true);
+  //   addSelected("");
+  // };
+
+  const navigate = useNavigate();
 
   const onClick = () => {
-    if (selected) {
-      setSelected(false);
-    }
+    // if (selected) {
+    //   setSelected(false);
+    // }
+    navigate(`/invoice/${invoice?.id}`);
   };
 
-  const longPressEvent = useLongPress({
-    onLongPress,
-    onClick,
-  });
+  // const longPressEvent = useLongPress({
+  //   onLongPress,
+  //   onClick,
+  // });
 
   return (
     <Card
       key={invoice?.id}
-      {...longPressEvent}
+      onClick={onClick}
       className={cn(
         "cursor-pointer shadow-sm transition-all ease duration-200 hover:bg-gray-100 hover:bg-opacity-60 select-none",
         selected ? "bg-blue-100 bg-opacity-40 hover:bg-blue-100" : ""
