@@ -1,19 +1,38 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { signOut } from "@/firebase/auth";
 import { auth } from "@/firebase/firebase";
 import { useInvoicesQuery } from "@/hooks/queries/useInvoicesQuery";
 import { useUserQuery } from "@/hooks/queries/useUserQuery";
-import { FileText, LayoutGrid, LayoutList, LogOut, Plus } from "lucide-react";
+import {
+  Download,
+  LayoutGrid,
+  LayoutList,
+  Link,
+  LogOut,
+  Mail,
+  MoreVertical,
+  Plus,
+  Trash2,
+  X,
+} from "lucide-react";
 import { useState } from "react";
+import SplashScreen from "./splash-screen";
+import FileCard from "@/components/file-card";
+import { useBarStore } from "@/state/bar-state";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [layout, setLayout] = useState<"grid" | "list">("grid");
   const { data: invoicesData } = useInvoicesQuery();
   const { data: userData } = useUserQuery();
+  const { clearSelected, selected } = useBarStore();
+  const navigate = useNavigate();
+  if (!userData) {
+    return <SplashScreen />;
+  }
 
   return (
-    <main className="relative h-[100svh] flex flex-col">
-      <header className="flex items-center justify-end px-6 pt-5 pb-1 text-2xl">
+    <main className="relative h-[100svh] flex flex-col px-0 sm:px-8 lg:px-16">
+      <header className="flex items-center justify-end px-6 pt-5 text-2xl">
         {/* <div className="flex items-center gap-1 flex-row-reverse">
           <h1 className="font-semibold">InvEasy</h1>
           <FileText />
@@ -41,54 +60,45 @@ export default function Home() {
             />
           )}
         </div>
-        <div className="grid grid-cols-2 pt-4 gap-5 overflow-scroll pb-4">
-          <Card>
-            <CardHeader className="flex items-center justify-center border-b">
-              <FileText size={40} className="opacity-60 my-2" />
-            </CardHeader>
-            <CardContent className="px-4 pb-2">
-              <p className="text-base mt-2 font-semibold">#Invoice 1</p>
-              <small className="text-sm">2 Hours ago</small>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex items-center justify-center border-b">
-              <FileText size={40} className="opacity-60 my-2" />
-            </CardHeader>
-            <CardContent className="px-4 pb-2">
-              <p className="text-base mt-2 font-semibold">#Invoice 1</p>
-              <small className="text-sm">2 Hours ago</small>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex items-center justify-center border-b">
-              <FileText size={40} className="opacity-60 my-2" />
-            </CardHeader>
-            <CardContent className="px-4 pb-2">
-              <p className="text-base mt-2 font-semibold">#Invoice 1</p>
-              <small className="text-sm">2 Hours ago</small>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex items-center justify-center border-b">
-              <FileText size={40} className="opacity-60 my-2" />
-            </CardHeader>
-            <CardContent className="px-4 pb-2">
-              <p className="text-base mt-2 font-semibold">#Invoice 1</p>
-              <small className="text-sm">2 Hours ago</small>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex items-center justify-center border-b">
-              <FileText size={40} className="opacity-60 my-2" />
-            </CardHeader>
-            <CardContent className="px-4 pb-2">
-              <p className="text-base mt-2 font-semibold">#Invoice 1</p>
-              <small className="text-sm">2 Hours ago</small>
-            </CardContent>
-          </Card>
+        {selected.length > 0 ? (
+          <div className="w-full rounded-full px-4 py-1 flex items-center gap-4 bg-blue-50 mt-2">
+            <div className="flex gap-2 items-center">
+              <div className="cursor-pointer hover:bg-gray-200 p-1 rounded-full transition-all ease">
+                <X size={18} onClick={clearSelected} />
+              </div>
+              <p className="cursor-default">{selected.length} selected</p>
+            </div>
+            <div className="flex items-center text-xs gap-1">
+              <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full transition-all ease">
+                <Download size={18} />
+              </div>
+              <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full transition-all ease">
+                <Trash2 size={18} />
+              </div>
+              <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full transition-all ease">
+                <Mail size={18} />
+              </div>
+              <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full transition-all ease">
+                <Link size={18} />
+              </div>
+              <div className="cursor-pointer hover:bg-gray-200 p-2 rounded-full transition-all ease">
+                <MoreVertical size={18} />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 pt-4 gap-5 overflow-scroll pb-4">
+          <FileCard />
+          <FileCard />
+          <FileCard />
+          <FileCard />
         </div>
-        <div className="absolute bg-primary bottom-6 text-white right-4 text-3xl p-3 rounded-full">
+        <div
+          onClick={() => navigate("/invoice/new")}
+          className="absolute bg-primary bottom-6 text-white right-4 sm:right-8 lg:right-16 text-3xl p-3 rounded-full cursor-pointer hover:rotate-180 transition-all ease duration-300"
+        >
           <Plus size={32} />
         </div>
       </div>

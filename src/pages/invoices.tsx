@@ -1,24 +1,11 @@
-import InvoicePage from "../components/InvoicePage";
-import { Invoice } from "../data/types";
+import InvoiceForm from "@/components/InvoiceForm";
 
 function InvoiceView() {
-  const savedInvoice = window.localStorage.getItem("invoiceData");
-  let data = null;
-
-  try {
-    if (savedInvoice) {
-      data = JSON.parse(savedInvoice);
-    }
-  } catch (_e) {}
-
-  const onInvoiceUpdated = (invoice: Invoice) => {
-    window.localStorage.setItem("invoiceData", JSON.stringify(invoice));
-  };
-
   return (
-    <div className="app">
-      <h1 className="center fs-30">React Invoice Generator</h1>
-      <InvoicePage pdfMode={false} data={data} onChange={onInvoiceUpdated} />
+    <div className="min-h-screen bg-gray-100">
+      <div className="mx-auto max-w-7xl">
+        <InvoiceForm />
+      </div>
     </div>
   );
 }

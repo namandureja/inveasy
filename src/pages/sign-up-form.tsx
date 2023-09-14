@@ -14,6 +14,11 @@ import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { signUp } from "@/firebase/auth";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
+export const Icons = {
+  spinner: Loader2,
+};
 
 const schema = z.object({
   email: z.string().email(),
@@ -26,6 +31,7 @@ const schema = z.object({
 });
 
 export default function SignUpForm() {
+  const [loading, setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -41,8 +47,10 @@ export default function SignUpForm() {
     password: string;
   }) => {
     try {
-      const user = await signUp(data.username, data.email, data.password);
+      setLoading(true);
+      await signUp(data.username, data.email, data.password);
     } catch (err: any) {
+      setLoading(false);
       if (err.code == "auth/email-already-in-use") {
         form.setError("root", {
           type: "manual",
@@ -104,8 +112,16 @@ export default function SignUpForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          Sign Up
+        <Button
+          type="submit"
+          className="w-full disabled:opacity-100"
+          disabled={loading}
+        >
+          {loading ? (
+            <Icons.spinner className="h-4 w-4 animate-spin" />
+          ) : (
+            "Sign Up"
+          )}
         </Button>
         <FormMessage>{form.formState.errors.root?.message}</FormMessage>
       </form>

@@ -13,10 +13,14 @@ import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useUserStore } from "../state/user-state";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "@/firebase/auth";
 import { FirebaseError } from "firebase/app";
+import { Loader2 } from "lucide-react";
+export const Icons = {
+  spinner: Loader2,
+};
 
 const schema = z.object({
   email: z.string().email(),
@@ -33,21 +37,21 @@ export default function LoginForm() {
       password: "",
     },
   });
-
-  const { user, setUser } = useUserStore();
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async (data) => {
           try {
+            setLoading(true);
             await signIn(data.email, data.password);
           } catch (err: any) {
+            setLoading(false);
             if (err.code == "auth/user-not-found") {
               form.setError("root", {
                 type: "manual",
-                message: "User not found, Please Sign Up",
+                message: "User not found, please sign up.",
               });
             } else if (err.code == "auth/wrong-password") {
               form.setError("root", {
@@ -88,15 +92,21 @@ export default function LoginForm() {
         />
         <Button
           type="submit"
-          // className="w-full rounded-md bg-clique border-black border-2 hover:bg-clique-dark py-6 px-4 text-base text-black text-left flex justify-between"
-          className="w-full"
+          className="w-full disabled:opacity-100"
+          disabled={loading}
         >
-          Sign In
+          {loading ? (
+            <Icons.spinner className="h-4 w-4 animate-spin" />
+          ) : (
+            "Sign In"
+          )}
         </Button>
         {/* <p className="text-sm font-medium text-destructive">
 
         </p> */}
-        <FormMessage>{form.formState.errors.root?.message}</FormMessage>
+        <FormMessage className="text-center">
+          {form.formState.errors.root?.message}
+        </FormMessage>
       </form>
     </Form>
   );

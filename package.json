@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@hookform/resolvers": "^3.3.1",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
@@ -19,6 +20,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "firebase": "^10.3.1",
+    "html-to-image": "^1.11.11",
+    "jspdf": "^2.5.1",
     "lucide-react": "^0.276.0",
     "rc-slider": "^10.2.1",
     "react": "^18.2.0",
@@ -30,6 +33,7 @@
     "sass": "^1.66.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
+    "uid": "^2.0.2",
     "zod": "^3.22.2",
     "zustand": "^4.4.1"
   },

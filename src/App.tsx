@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route element={<Protected />}>
             <Route path="/" element={<Home />} />
-            <Route path="/invoice" element={<InvoiceView />} />
+            <Route path="/invoice/new" element={<InvoiceView />} />
           </Route>
           <Route path="/auth" element={<AuthPage />}>
             <Route index element={<Navigate replace to="sign-in" />} />
