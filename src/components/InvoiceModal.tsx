@@ -1,41 +1,47 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
+import { Invoice } from "@/data/types";
+import InvoiceForm from "./InvoiceForm";
+import InvoiceView from "./InvoiceView";
+import { UploadCloud } from "lucide-react";
+import { Button } from "./ui/button";
+import { Loader2 } from "lucide-react";
+import { uploadInvoice } from "@/firebase/invoice";
+import { useNavigate } from "react-router-dom";
+export const Icons = {
+  spinner: Loader2,
+};
 
 const InvoiceModal = ({
   isOpen,
   setIsOpen,
-  invoiceInfo,
-  items,
-  onAddNextInvoice,
+  invoice,
+  setInvoice,
+  onSubmit,
 }: {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  invoiceInfo: {
-    invoiceNumber: string;
-    cashierName: string;
-    customerName: string;
-    subtotal: number;
-    discountRate: number;
-    taxRate: number;
-    total: number;
-  };
-  items: {
-    id: string;
-    name: string;
-    qty: number;
-    price: number;
-  }[];
-  onAddNextInvoice: () => void;
+  setInvoice: React.Dispatch<React.SetStateAction<Invoice>>;
+  invoice: Invoice;
+  onSubmit?: () => void;
 }) => {
   function closeModal() {
     setIsOpen(false);
   }
-
-  const addNextInvoiceHandler = () => {
-    setIsOpen(false);
-    onAddNextInvoice();
+  const navigate = useNavigate();
+  const submitHandler = async () => {
+    // setIsOpen(false);
+    setLoading(true);
+    try {
+      await uploadInvoice(invoice);
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
   };
 
   const SaveAsPDFHandler = () => {
@@ -100,13 +106,15 @@ const InvoiceModal = ({
             pdf.addImage(imgData, imageType, 0, 0, pdfWidth, pageHeight);
           }
           // Output / Save
-          pdf.save(`invoice-${invoiceInfo.invoiceNumber}.pdf`);
+          pdf.save(`invoice-${invoice.invoiceNumber}.pdf`);
         };
       })
       .catch((error: any) => {
         console.error("oops, something went wrong!", error);
       });
   };
+
+  const [loading, setLoading] = useState(false);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -115,7 +123,7 @@ const InvoiceModal = ({
         className="fixed inset-0 z-10 overflow-y-auto"
         onClose={closeModal}
       >
-        <div className="min-h-screen px-4 text-center">
+        <div className="min-h-screen px-4 text-center ">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -144,75 +152,20 @@ const InvoiceModal = ({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="my-8 inline-block w-full max-w-md transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all">
-              <div className="p-4" id="print">
-                <h1 className="text-center text-lg font-bold text-gray-900">
-                  INVOICE
-                </h1>
-                <div className="mt-6">
-                  <div className="mb-4 grid grid-cols-2">
-                    <span className="font-bold">Invoice Number:</span>
-                    <span>{invoiceInfo.invoiceNumber}</span>
-                    <span className="font-bold">Cashier:</span>
-                    <span>{invoiceInfo.cashierName}</span>
-                    <span className="font-bold">Customer:</span>
-                    <span>{invoiceInfo.customerName}</span>
-                  </div>
-
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="border-y border-black/10 text-sm md:text-base">
-                        <th>ITEM</th>
-                        <th className="text-center">QTY</th>
-                        <th className="text-right">PRICE</th>
-                        <th className="text-right">AMOUNT</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {items.map((item) => (
-                        <tr key={item.id}>
-                          <td className="w-full">{item.name}</td>
-                          <td className="min-w-[50px] text-center">
-                            {item.qty}
-                          </td>
-                          <td className="min-w-[80px] text-right">
-                            ${Number(item.price).toFixed(2)}
-                          </td>
-                          <td className="min-w-[90px] text-right">
-                            ${Number(item.price * item.qty).toFixed(2)}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-
-                  <div className="mt-4 flex flex-col items-end space-y-2">
-                    <div className="flex w-full justify-between border-t border-black/10 pt-2">
-                      <span className="font-bold">Subtotal:</span>
-                      <span>${invoiceInfo.subtotal.toFixed(2)}</span>
-                    </div>
-                    <div className="flex w-full justify-between">
-                      <span className="font-bold">Discount:</span>
-                      <span>${invoiceInfo.discountRate.toFixed(2)}</span>
-                    </div>
-                    <div className="flex w-full justify-between">
-                      <span className="font-bold">Tax:</span>
-                      <span>${invoiceInfo.taxRate.toFixed(2)}</span>
-                    </div>
-                    <div className="flex w-full justify-between border-t border-black/10 py-2">
-                      <span className="font-bold">Total:</span>
-                      <span className="font-bold">
-                        $
-                        {invoiceInfo.total % 1 === 0
-                          ? invoiceInfo.total
-                          : invoiceInfo.total.toFixed(2)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+            <div className="h-[calc(100svh-30px)] py-2 inline-block w-full max-w-full sm:max-w-[90%] lg:max-w-[900px] transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all">
+              <div
+                id="print"
+                className="p-1 overflow-scroll h-[calc(100%-70px)]"
+              >
+                <InvoiceView
+                  pdfMode={true}
+                  invoice={invoice}
+                  setInvoice={setInvoice}
+                  key="view-invoice"
+                />
               </div>
-              <div className="mt-4 flex space-x-2 px-4 pb-6">
-                <button
+              <div className="flex space-x-2 px-4 pb-4 border-t pt-4">
+                {/* <button
                   className="flex w-full items-center justify-center space-x-1 rounded-md border border-blue-500 py-2 text-sm text-blue-500 shadow-sm hover:bg-blue-500 hover:text-white"
                   onClick={SaveAsPDFHandler}
                 >
@@ -231,27 +184,20 @@ const InvoiceModal = ({
                     />
                   </svg>
                   <span>Download</span>
-                </button>
-                <button
-                  onClick={addNextInvoiceHandler}
-                  className="flex w-full items-center justify-center space-x-1 rounded-md bg-blue-500 py-2 text-sm text-white shadow-sm hover:bg-blue-600"
+                </button> */}
+                <Button
+                  onClick={submitHandler}
+                  className="w-full flex gap-2 text-sm"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 5l7 7-7 7M5 5l7 7-7 7"
-                    />
-                  </svg>
-                  <span>Next</span>
-                </button>
+                  {loading ? (
+                    <Icons.spinner className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <>
+                      <UploadCloud />
+                      <span>Save to cloud</span>
+                    </>
+                  )}
+                </Button>
               </div>
             </div>
           </Transition.Child>

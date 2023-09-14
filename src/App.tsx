@@ -4,7 +4,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import InvoiceView from "./pages/invoices";
+import InvoicePage from "./pages/invoices";
 import AuthPage from "./pages/auth-view";
 import LoginForm from "./pages/login-form";
 import SignUpForm from "./pages/sign-up-form";
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route element={<Protected />}>
             <Route path="/" element={<Home />} />
-            <Route path="/invoice/new" element={<InvoiceView />} />
+            <Route path="/invoice/new" element={<InvoicePage />} />
           </Route>
           <Route path="/auth" element={<AuthPage />}>
             <Route index element={<Navigate replace to="sign-in" />} />

@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import SplashScreen from "./splash-screen";
-import FileCard from "@/components/file-card";
+import FileCard, { EmptyFileCard } from "@/components/file-card";
 import { useBarStore } from "@/state/bar-state";
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +26,7 @@ export default function Home() {
   const { data: userData } = useUserQuery();
   const { clearSelected, selected } = useBarStore();
   const navigate = useNavigate();
-  if (!userData) {
+  if (!userData || !invoicesData) {
     return <SplashScreen />;
   }
 
@@ -88,13 +88,19 @@ export default function Home() {
           </div>
         ) : (
           <></>
+
         )}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 pt-4 gap-5 overflow-scroll pb-4">
-          <FileCard />
-          <FileCard />
-          <FileCard />
-          <FileCard />
-        </div>
+        {invoicesData?.length > 0 ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 pt-4 gap-5 overflow-scroll pb-4">
+            {invoicesData?.map((invoice) => (
+              <FileCard key={invoice.id} invoice={invoice} />
+            ))}
+          </div>
+        ) : (
+          <div className="w-full text-center text-gray-800 py-4 font-medium">
+            <p>No invoices yet. Click the button below to create one.</p>
+          </div>
+        )}
         <div
           onClick={() => navigate("/invoice/new")}
           className="absolute bg-primary bottom-6 text-white right-4 sm:right-8 lg:right-16 text-3xl p-3 rounded-full cursor-pointer hover:rotate-180 transition-all ease duration-300"

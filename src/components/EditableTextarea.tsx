@@ -6,6 +6,7 @@ import compose from '../styles/compose'
 interface Props {
   className?: string
   placeholder?: string
+  defaultValue?: string
   value?: string
   onChange?: (value: string) => void
   pdfMode?: boolean

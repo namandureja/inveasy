@@ -16,10 +16,10 @@
 
 .input,
 .select {
-  &:hover,
-  &:focus {
-    background: $color-yellow;
-  }
+  // &:hover,
+  // &:focus {
+  //   background: $color-yellow;
+  // }
 
   &:focus {
     border-color: $color-cyan;
@@ -81,22 +81,16 @@
 
 .image__upload {
   cursor: pointer;
-  font-size: 12px;
   color: $placeholder-color;
   background-color: $color-gray;
   border: 2px dashed $placeholder-color;
   display: block;
-  width: 100px;
-  height: 20px;
+  width: 220px;
   padding: 0;
   outline: none;
   transition: height 0.2s, font-size 0.2s;
-
-  &:focus,
-  &:hover {
-    height: 100px;
-    font-size: 14px;
-  }
+  height: 120px;
+  font-size: 14px;
 }
 
 .image__img {

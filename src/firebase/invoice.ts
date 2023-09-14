@@ -19,6 +19,7 @@ export async function uploadInvoice(invoice: Invoice) {
   const document = await addDoc(collection(db, "invoices"), {
     ...invoice,
     userId: user.uid,
+    createdAt: new Date().toUTCString(),
   });
   return document.id;
 }
@@ -52,7 +53,6 @@ export async function fetchInvoices() {
     invoices.push({
       ...doc.data(),
       id: doc.id,
-      createdAt: doc.data().createdAt.toMillis(),
     } as InvoiceServer);
   });
 
