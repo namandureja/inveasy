@@ -21,6 +21,50 @@ function ViewInvoicePage() {
     }
   }, [invoiceData]);
 
+  const saveCsv = (invoice: Invoice) => {
+    const invoiceDate =
+      invoice.invoiceDate !== "" ? new Date(invoice.invoiceDate) : new Date();
+
+    const subtotal = invoice.productLines.reduce((prev, curr) => {
+      if (curr.name.trim().length > 0)
+        return prev + Number(curr.price * Math.floor(curr.qty));
+      else return prev;
+    }, 0);
+    const taxRate = (parseFloat(invoice.tax || "0") * subtotal) / 100;
+    const discountRate = (parseFloat(invoice.discount || "0") * subtotal) / 100;
+    const total = subtotal - discountRate + taxRate;
+
+    const csvLines = [
+      `Invoice Number,"${invoice.invoiceNumber}"`,
+      `Invoice Date,"${invoiceDate}"`,
+      ``,
+      `Company Name,"${invoice.companyName}"`,
+      `Company Address,"${
+        invoice.companyAddress +
+        ", " +
+        invoice.companyAddress2 +
+        ", " +
+        invoice.companyCountry
+      }"`,
+      ``,
+      `Client Name,"${invoice.clientName}"`,
+      `Client Email,"${invoice.clientEmail}"`,
+      `Client Address,"${invoice.clientAddress}"`,
+      ``,
+      `Item ID,Name,Quantity,Price`,
+      ...invoice.productLines.map(
+        (item) => `"${item.id}","${item.name}","${item.qty}","${item.price}"`
+      ),
+      ``,
+      `Subtotal,,,"${subtotal}"`,
+      `Discount,,,"${invoice.discount}"`,
+      `Tax,,,"${invoice.tax}"`,
+      `Total,,,"${total}"`,
+    ];
+
+    window.open("data:text/csv;charset=utf-8," + csvLines.join("\n"));
+  };
+
   if (!invoiceData) return <SplashScreen />;
 
   return (
@@ -62,7 +106,7 @@ function ViewInvoicePage() {
           <span>Print</span>
         </Button>
         <Button
-          onClick={() => {}}
+          onClick={() => saveCsv(invoice)}
           className="flex items-center gap-2"
           variant="outline"
         >
