@@ -16,7 +16,7 @@ export default function AuthPage() {
     }
   });
   return (
-    <main className="flex flex-col items-center w-full sm:w-[350px] mx-auto justify-center min-h-[100svh] pb-20 px-10">
+    <main className="flex flex-col items-center w-full sm:w-[350px] mx-auto justify-center min-h-[100vh] pb-20 px-10">
       <div className="flex gap-2 items-center flex-row-reverse">
         <h1 className="text-3xl font-semibold">InvEasy</h1>
         <FileText />
