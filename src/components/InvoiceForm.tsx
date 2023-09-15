@@ -5,6 +5,7 @@ import { Invoice } from "@/data/types";
 import { Button } from "./ui/button";
 import { initialInvoice } from "@/data/initialData";
 import InvoiceView from "./InvoiceView";
+import { ChevronLeft } from "lucide-react";
 
 interface Props {
   invoice: Invoice;
@@ -23,17 +24,25 @@ const InvoiceForm: FC<Props> = ({ invoice, setInvoice, pdfMode, onChange }) => {
 
   return (
     <div className="relative flex flex-col px-2 md:flex-row gap-2 w-full">
-      <form
-        className="relative my-6 flex-1 p-1 rounded-md bg-white shadow-sm"
-        id="invoice-form"
-        onSubmit={reviewInvoiceHandler}
-      >
-        <InvoiceView
-          invoice={invoice}
-          setInvoice={setInvoice}
-          pdfMode={pdfMode}
-        />
-      </form>
+      <div>
+        <a href="/">
+          <p className="w-fit mt-3 flex items-center gap-1 cursor-pointer">
+            <ChevronLeft size={20} />
+            Go Back
+          </p>
+        </a>
+        <form
+          className="relative mb-6 mt-3 flex-1 p-1 rounded-md bg-white shadow-sm"
+          id="invoice-form"
+          onSubmit={reviewInvoiceHandler}
+        >
+          <InvoiceView
+            invoice={invoice}
+            setInvoice={setInvoice}
+            pdfMode={pdfMode}
+          />
+        </form>
+      </div>
       <div className="basis-1/4 bg-transparent">
         <div className="sticky top-0 z-10 space-y-4 divide-y divide-gray-900/10 pb-8 px-4 md:px-0 md:pt-6 md:pl-4">
           <div className="space-y-4 pb-2">

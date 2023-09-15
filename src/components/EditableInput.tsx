@@ -21,7 +21,7 @@ const EditableInput: FC<Props> = ({
     <>
       {pdfMode ? (
         value ? (
-          <p className="py-1">{value}</p>
+          <p className="py-1 break-all">{value}</p>
         ) : (
           <></>
         )

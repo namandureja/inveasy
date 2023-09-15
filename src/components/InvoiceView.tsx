@@ -46,8 +46,8 @@ export default function InvoiceView({
       value: event.target.value as any,
     };
 
-    if(editedItem.name === "qty" || editedItem.name === "price") {
-        editedItem.value = Number(editedItem.value);
+    if (editedItem.name === "qty" || editedItem.name === "price") {
+      editedItem.value = Number(editedItem.value);
     }
 
     const newItems = invoice.productLines.map((item) => {
@@ -195,7 +195,7 @@ export default function InvoiceView({
         <p className="text-sm font-bold md:text-base w-full border-b pb-2">
           Customer:
         </p>
-        <div className="grid grid-cols-2 gap-2 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-2 pt-2">
           <EditableInput
             placeholder="Customer Name"
             className="flex-1 p-2"
@@ -221,7 +221,7 @@ export default function InvoiceView({
             pdfMode={pdfMode}
           />
         </div>
-        <div className="grid grid-cols-2 gap-2 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-2 sm:pt-2">
           <EditableInput
             placeholder="Customer Address"
             className="flex-1 p-2"

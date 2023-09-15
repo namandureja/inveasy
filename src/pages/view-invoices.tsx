@@ -69,10 +69,13 @@ function ViewInvoicePage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="flex gap-1 items-center flex-row-reverse w-full justify-center py-6">
+      <a
+        className="flex gap-1 items-center flex-row-reverse w-full justify-center py-6"
+        href="/"
+      >
         <h1 className="text-2xl font-semibold">InvEasy</h1>
         <FileText />
-      </div>
+      </a>
       <div className="flex items-center gap-3 justify-center flex-wrap pb-3 px-4">
         <Button
           onClick={() => {
