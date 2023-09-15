@@ -5,6 +5,8 @@
 
 ---
 
+- **Team Name**: YuvBharat  
+
 ### 🚀 Quick Links 🚀
 
 - **Live Webapp Prototype**: [InvEasy](https://inveasy.netlify.app/)
