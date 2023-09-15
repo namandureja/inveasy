@@ -134,7 +134,19 @@ function ViewInvoicePage() {
         </Button>
         <Button
           onClick={() => {
-            window.open("mailto:" + invoice.clientEmail);
+            window.open(
+              "mailto:" +
+                invoice.clientEmail +
+                "?subject=Invoice " +
+                invoice.invoiceNumber +
+                "&body=" +
+                "Hi " +
+                invoice.clientName +
+                ",\n\nPlease find the invoice attached. You can also view it by clicking on this link below:\n" +
+                window.location.href +
+                "\n\nRegards,\n" +
+                invoice.companyName
+            );
           }}
           className="flex items-center gap-2"
           variant="outline"
