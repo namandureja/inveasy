@@ -102,7 +102,7 @@ function ViewInvoicePage() {
         <Button
           onClick={() => {
             try {
-              document.execCommand("print", false, null);
+              document.execCommand("print", false, null as any);
             } catch {
               window.print();
             }
