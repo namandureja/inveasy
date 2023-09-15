@@ -31,7 +31,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative h-[100svh] flex flex-col px-0 sm:px-8 lg:px-16">
+    <main className="relative h-[100vh] flex flex-col px-0 sm:px-8 lg:px-16">
       <header className="flex items-center justify-end px-6 pt-5 text-2xl">
         {/* <div className="flex items-center gap-1 flex-row-reverse">
           <h1 className="font-semibold">InvEasy</h1>

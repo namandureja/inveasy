@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.ionic.inveasy",
+      "sha256_cert_fingerprints": [
+        "12:3F:9E:99:42:18:7F:BB:8D:8D:EF:EB:36:2B:CA:1D:06:91:54:AF:E7:16:24:70:C4:A8:21:39:65:C0:59:F0"
+      ]
+    }
+  }
+]

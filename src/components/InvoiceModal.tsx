@@ -152,7 +152,7 @@ const InvoiceModal = ({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="h-[calc(100svh-30px)] py-2 inline-block w-full max-w-full sm:max-w-[90%] lg:max-w-[900px] transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all">
+            <div className="h-[calc(100vh-30px)] py-2 inline-block w-full max-w-full sm:max-w-[90%] lg:max-w-[900px] transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all">
               <div
                 id="print"
                 className="p-1 overflow-scroll h-[calc(100%-70px)]"
