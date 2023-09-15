@@ -899,6 +899,24 @@
     debug "^4.0.0"
     tslib "^2.0.1"
 
+"@ionic/core@7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-7.4.0.tgz#43fc741dfc845f17fc1d669b8c15cb6b475800d0"
+  integrity sha512-Kuu04UljgmKz2Umcm77QCP+4O1rV67EEUtK/Kx0eIp+h+eoSkJJK4/p3EpkvrlKRDOfv4xlUnqKw7+yqhBg36w==
+  dependencies:
+    "@stencil/core" "^4.2.1"
+    ionicons "7.1.0"
+    tslib "^2.1.0"
+
+"@ionic/react@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@ionic/react/-/react-7.4.0.tgz#4acd602a3869f84e65d125729e0aa40319849468"
+  integrity sha512-BUytiAPasBuGkHT/rc43+KpmVDoJB2lsCXWUhmyzWIVtd8dPnbYy7y3QIV85U0bpEyc21VMI8Jin9pL/U0OOog==
+  dependencies:
+    "@ionic/core" "7.4.0"
+    ionicons "^7.0.0"
+    tslib "*"
+
 "@ionic/utils-array@2.1.6", "@ionic/utils-array@^2.1.5":
   version "2.1.6"
   resolved "https://registry.npmjs.org/@ionic/utils-array/-/utils-array-2.1.6.tgz"
@@ -1377,10 +1395,20 @@
   dependencies:
     "@babel/runtime" "^7.20.13"
 
-"@remix-run/router@1.8.0":
-  version "1.8.0"
-  resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.8.0.tgz"
-  integrity sha512-mrfKqIHnSZRyIzBcanNJmVQELTnX+qagEDlcKO90RgRBVOZGSGvZKeDihTRfWcqoDn5N/NkUcwWTccnpN18Tfg==
+"@remix-run/router@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.9.0.tgz#9033238b41c4cbe1e961eccb3f79e2c588328cf6"
+  integrity sha512-bV63itrKBC0zdT27qYm6SDZHlkXwFL1xMBuhkn+X7l0+IIhNaH5wuuvZKp6eKhCD4KFhujhfhCT1YxXW6esUIA==
+
+"@stencil/core@^2.18.0":
+  version "2.22.3"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.22.3.tgz#83987e20bba855c450f6d6780e3a20192603f13f"
+  integrity sha512-kmVA0M/HojwsfkeHsifvHVIYe4l5tin7J5+DLgtl8h6WWfiMClND5K3ifCXXI2ETDNKiEk21p6jql3Fx9o2rng==
+
+"@stencil/core@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-4.2.1.tgz#c60fa612f83d3380847d93d8b09097528a941576"
+  integrity sha512-alYwqVwxfD0n6HKRVJqJoTzQNnf44n/sddvjNu3JMEn3sfY/Ag7rpmwUntYjtJmRut+or+9gPPgIJviCuKi4yQ==
 
 "@swc/helpers@^0.4.2":
   version "0.4.36"
@@ -3324,6 +3352,20 @@ ini@^3.0.1:
   resolved "https://registry.npmjs.org/ini/-/ini-3.0.1.tgz"
   integrity sha512-it4HyVAUTKBc6m8e1iXWvXSTdndF7HbdN713+kvLrymxTaU4AUBWrJ4vEooP+V7fexnVD3LKcBshjGGPefSMUQ==
 
+ionicons@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-7.1.0.tgz#25daa91345acedcb0f4fb7da670f5aff2e1f266a"
+  integrity sha512-iE4GuEdEHARJpp0sWL7WJZCzNCf5VxpNRhAjW0fLnZPnNL5qZOJUcfup2Z2Ty7Jk8Q5hacrHfGEB1lCwOdXqGg==
+  dependencies:
+    "@stencil/core" "^2.18.0"
+
+ionicons@^7.0.0:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-7.1.2.tgz#fdf47afdad980349803a705473f51697370b3dad"
+  integrity sha512-zZ4njAqSP39H8RRvZhJvkHsv7cBjYE/VfInH218Osf2UVxJITSOutTTd25MW+tAXKN5fheYzclUXUsF55JHUDg==
+  dependencies:
+    "@stencil/core" "^2.18.0"
+
 is-arrayish@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.2.1.tgz#77c99840527aa8ecb1a8ba697b80645a7a926a9d"
@@ -4495,20 +4537,20 @@ react-refresh@^0.14.0:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.0.tgz"
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
-react-router-dom@^6.15.0:
-  version "6.15.0"
-  resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.15.0.tgz"
-  integrity sha512-aR42t0fs7brintwBGAv2+mGlCtgtFQeOzK0BM1/OiqEzRejOZtpMZepvgkscpMUnKb8YO84G7s3LsHnnDNonbQ==
+react-router-dom@^6.16.0:
+  version "6.16.0"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.16.0.tgz#86f24658da35eb66727e75ecbb1a029e33ee39d9"
+  integrity sha512-aTfBLv3mk/gaKLxgRDUPbPw+s4Y/O+ma3rEN1u8EgEpLpPe6gNjIsWt9rxushMHHMb7mSwxRGdGlGdvmFsyPIg==
   dependencies:
-    "@remix-run/router" "1.8.0"
-    react-router "6.15.0"
+    "@remix-run/router" "1.9.0"
+    react-router "6.16.0"
 
-react-router@6.15.0:
-  version "6.15.0"
-  resolved "https://registry.npmjs.org/react-router/-/react-router-6.15.0.tgz"
-  integrity sha512-NIytlzvzLwJkCQj2HLefmeakxxWHWAP+02EGqWEZy+DgfHHKQMUoBBjUQLOtFInBMhWtb3hiUy6MfFgwLjXhqg==
+react-router@6.16.0:
+  version "6.16.0"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.16.0.tgz#abbf3d5bdc9c108c9b822a18be10ee004096fb81"
+  integrity sha512-VT4Mmc4jj5YyjpOi5jOf0I+TYzGpvzERy4ckNSvSh2RArv8LLoCxlsZ2D+tc7zgjxcY34oTz2hZaeX5RVprKqA==
   dependencies:
-    "@remix-run/router" "1.8.0"
+    "@remix-run/router" "1.9.0"
 
 react-textarea-autosize@^8.5.3:
   version "8.5.3"
@@ -5236,7 +5278,7 @@ ts-node@^10.2.1:
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
 
-tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.0:
+tslib@*, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.0:
   version "2.6.2"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz"
   integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==

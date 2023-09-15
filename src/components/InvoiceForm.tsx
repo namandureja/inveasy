@@ -24,7 +24,7 @@ const InvoiceForm: FC<Props> = ({ invoice, setInvoice, pdfMode, onChange }) => {
 
   return (
     <div className="relative flex flex-col px-2 md:flex-row gap-2 w-full">
-      <div>
+      <div className="flex-1 relative overflow-scroll">
         <a href="/">
           <p className="w-fit mt-3 flex items-center gap-1 cursor-pointer">
             <ChevronLeft size={20} />
