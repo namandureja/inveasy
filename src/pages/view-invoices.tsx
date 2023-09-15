@@ -115,7 +115,9 @@ function ViewInvoicePage() {
           <span>Download as CSV</span>
         </Button>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            window.open("mailto:" + invoice.clientEmail);
+          }}
           className="flex items-center gap-2"
           variant="outline"
         >
