@@ -22,21 +22,19 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Router>
           <AppUrlListener></AppUrlListener>
-          <IonRouterOutlet>
-            <Routes>
-              <Route element={<Protected />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/invoice/new" element={<InvoicePage />} />
-                <Route path="/invoice/:id" element={<ViewInvoicePage />} />
-              </Route>
-              <Route path="/auth" element={<AuthPage />}>
-                <Route index element={<Navigate replace to="sign-in" />} />
-                <Route path="sign-in" element={<LoginForm />} />
-                <Route path="sign-up" element={<SignUpForm />} />
-                <Route path="*" element={<Navigate to={"/404"} />} />
-              </Route>
-            </Routes>
-          </IonRouterOutlet>
+          <Routes>
+            <Route element={<Protected />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/invoice/new" element={<InvoicePage />} />
+              <Route path="/invoice/:id" element={<ViewInvoicePage />} />
+            </Route>
+            <Route path="/auth" element={<AuthPage />}>
+              <Route index element={<Navigate replace to="sign-in" />} />
+              <Route path="sign-in" element={<LoginForm />} />
+              <Route path="sign-up" element={<SignUpForm />} />
+              <Route path="*" element={<Navigate to={"/404"} />} />
+            </Route>
+          </Routes>
         </Router>
       </QueryClientProvider>
     </IonApp>

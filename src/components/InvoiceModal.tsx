@@ -41,6 +41,7 @@ const InvoiceModal = ({
     } catch (error) {
       setLoading(false);
       console.error(error);
+      alert("Choose a smaller image, cannot be more than 1MB");
     }
   };
 

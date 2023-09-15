@@ -4,7 +4,14 @@ import { Button } from "@/components/ui/button";
 import { initialInvoice } from "@/data/initialData";
 import { Invoice } from "@/data/types";
 import { useInvoiceQuery } from "@/hooks/queries/useInvoicesQuery";
-import { ChevronLeft, FileText, Mail, Printer, Table } from "lucide-react";
+import {
+  ChevronLeft,
+  FileText,
+  Link,
+  Mail,
+  Printer,
+  Table,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
@@ -12,6 +19,7 @@ import SplashScreen from "./splash-screen";
 import { Filesystem, Directory, Encoding } from "@capacitor/filesystem";
 import { EmailComposer } from "capacitor-email-composer";
 import { Toast } from "@capacitor/toast";
+import { Clipboard } from "@capacitor/clipboard";
 
 function ViewInvoicePage() {
   const { id } = useParams();
@@ -91,7 +99,7 @@ function ViewInvoicePage() {
         console.log("File written to disk");
         setLoadingCSV(false);
         await Toast.show({
-          text: "Downloaded CSV",
+          text: "Downloaded CSV in /Documents",
           duration: "long",
           position: "bottom",
         });
@@ -146,7 +154,7 @@ function ViewInvoicePage() {
         console.log("File written to disk");
         setLoadingPDF(false);
         await Toast.show({
-          text: "Downloaded PDF",
+          text: "Downloaded PDF in /Documents",
           duration: "long",
           position: "bottom",
         });
@@ -182,16 +190,18 @@ function ViewInvoicePage() {
           <FileText size={18} />
           <span>Download as PDF</span>
         </Button>
-        {/* <Button
-          onClick={() => {
-            window.print();
+        <Button
+          onClick={async () => {
+            await Clipboard.write({
+              string: `https://inveasy.netlify.app/invoice/${id}`,
+            });
           }}
           variant="outline"
           className="flex items-center gap-2"
         >
-          <Printer size={18} />
-          <span>Print</span>
-        </Button> */}
+          <Link size={18} />
+          <span>Copy Link</span>
+        </Button>
         <Button
           onClick={() => handleDownloadCSV(invoice)}
           className="flex items-center gap-2"
@@ -213,7 +223,7 @@ function ViewInvoicePage() {
             EmailComposer.open({
               to: [invoice.clientEmail],
               subject: `Invoice #${invoice.invoiceNumber}`,
-              body: `Hi ${invoice.clientName},\n\nPlease find the attached invoice.\n\nRegards,\n${invoice.companyName}`,
+              body: `Hi ${invoice.clientName},\n\nPlease find the attached invoice. You can also view it here: \nhttps://inveasy.netlify.app/invoice/${id}\n\nRegards,\n${invoice.companyName}`,
               isHtml: false,
               attachments: [
                 {
