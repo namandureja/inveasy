@@ -10,11 +10,11 @@ const AppUrlListener: React.FC<any> = () => {
     App.addListener("appUrlOpen", (event: URLOpenListenerEvent) => {
       // Example url: https://beerswift.app/tabs/tab2
       // slug = /tabs/tab2
+      console.log("App opened with URL: " + event.url);
       const slug = event.url.split(".app").pop();
       if (slug) {
         navigate(slug);
       }
-
     });
   }, []);
 
