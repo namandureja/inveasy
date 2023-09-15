@@ -1,7 +1,7 @@
 # 🌟 InvEasy 🌟
 ## A Fully Cloud-Based 🌩️ Invoice Management System 💼
 
-<img width="400" alt="Screenshot 2023-09-15 at 10 54 55 AM" src="https://github.com/namandureja/sih/assets/58641903/ec9609d4-4841-453a-a842-1ab6daa2f23b">
+![Rotato Snapshot](https://github.com/namandureja/sih/assets/58641903/bc8d1695-bc5a-4701-9d3f-bc9576b2a46a)
 
 ---
 
