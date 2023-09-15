@@ -41,6 +41,9 @@ const InvoiceModal = ({
     } catch (error) {
       setLoading(false);
       console.error(error);
+      alert(
+        "Image size is too large, please try again with a smaller image (< 1MB)"
+      );
     }
   };
 

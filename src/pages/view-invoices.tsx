@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { initialInvoice } from "@/data/initialData";
 import { Invoice } from "@/data/types";
 import { useInvoiceQuery } from "@/hooks/queries/useInvoicesQuery";
-import { FileText, Mail, Printer, Table } from "lucide-react";
+import { FileText, Link, Mail, Printer, Table } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
@@ -101,13 +101,28 @@ function ViewInvoicePage() {
         </Button>
         <Button
           onClick={() => {
-            window.print();
+            try {
+              document.execCommand("print", false, null);
+            } catch {
+              window.print();
+            }
           }}
           variant="outline"
           className="flex items-center gap-2"
         >
           <Printer size={18} />
           <span>Print</span>
+        </Button>
+        <Button
+          onClick={() => {
+            if (window.navigator.clipboard)
+              navigator.clipboard.writeText(window.location.href);
+          }}
+          variant="outline"
+          className="flex items-center gap-2"
+        >
+          <Link size={18} />
+          <span>Copy Link</span>
         </Button>
         <Button
           onClick={() => saveCsv(invoice)}
