@@ -60,7 +60,7 @@ const InvoiceItem = ({
       </td>
       <td className="relative min-w-[100px] md:min-w-[150px]">
         {pdfMode ? (
-          <p className="text-center">₹&nbsp;{price.toFixed(2)}</p>
+          <p className="text-center">Rs.&nbsp;{price.toFixed(2)}</p>
         ) : (
           <>
             <IndianRupee
@@ -108,7 +108,7 @@ const InvoiceItem = ({
       )}
       {pdfMode && (
         <td className="flex items-center justify-center">
-          ₹&nbsp;{(price * qty).toFixed(2)}
+          Rs.&nbsp;{(price * qty).toFixed(2)}
         </td>
       )}
     </tr>

@@ -10,6 +10,8 @@ import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import { uploadInvoice } from "@/firebase/invoice";
 import { useNavigate } from "react-router-dom";
+import { Dialog as d } from "@capacitor/dialog";
+
 export const Icons = {
   spinner: Loader2,
 };
@@ -41,7 +43,10 @@ const InvoiceModal = ({
     } catch (error) {
       setLoading(false);
       console.error(error);
-      alert("Choose a smaller image, cannot be more than 1MB");
+      await d.alert({
+        title: "Error",
+        message: "Choose a smaller image, cannot be more than 1MB",
+      });
     }
   };
 
