@@ -6,5 +6,5 @@ A fully cloud based invoice management system.
 
 Deployed webapp prototype - https://inveasy.netlify.app/  
 Link to the mobile apk - https://ndureja.com/app-debug.apk  
-Demo video for the prototype - https://drive.google.com/file/d/1fYpahjoUH3syDDdyHzyoHQvWKdtMMSJK/view?usp=sharing
+Demo video for the prototype - https://drive.google.com/file/d/1fYpahjoUH3syDDdyHzyoHQvWKdtMMSJK/view?usp=sharing  
 Pitch Deck - https://www.canva.com/design/DAFucaiU9Bc/0MaWg_3rp10IDxLttxHeGg/view?utm_content=DAFucaiU9Bc&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink
