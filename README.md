@@ -1,27 +1,18 @@
-# React + TypeScript + Vite
+# 🌟 InvEasy 🌟
+## A Fully Cloud-Based 🌩️ Invoice Management System 💼
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Rotato Snapshot](https://github.com/namandureja/sih/assets/58641903/bc8d1695-bc5a-4701-9d3f-bc9576b2a46a)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Team Name**: YuvBharat  
 
-## Expanding the ESLint configuration
+### 🚀 Quick Links 🚀
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Live Webapp Prototype**: [InvEasy](https://inveasy.netlify.app/)
+- **📱 Mobile APK**: [Download Here](https://ndureja.com/app-debug.apk)
+- **🎥 Demo Video**: [Watch Now](https://drive.google.com/file/d/1fYpahjoUH3syDDdyHzyoHQvWKdtMMSJK/view?usp=sharing)
+- **📊 Inveasy Pitch Deck**: [View PPT](https://drive.google.com/file/d/12M3i4q0Fh6ojLana_XZ0asUj7LATvSMa/view?usp=sharing)
+- **📊 SIH Pitch  PPT**: [View PPT](https://canva.com/design/DAFucaiU9Bc/0MaWg_3rp10IDxLttxHeGg/view?utm_content=DAFucaiU9Bc&utm_campaign=designshare&utm_medium=link&utm_source=viewer)
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+---
